@@ -1,9 +1,14 @@
-package com.twilio.sms.reminder.notification;
+package com.sms.reminder.notification;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +16,15 @@ public class NotificationService {
 	
 	@Autowired
 	private NotificationRepository notificationRepository;
+	
+	@Value("${twilio.ACCOUNT_SID}")
+	private String ACCOUNT_SID;
+	
+	@Value("${twilio.AUTH_TOKEN}")
+	private String AUTH_TOKEN;
+	
+	@Value("${twilio.NUMBER}")
+	private String TWILIO_NUMBER;
 	
 	// GET for "/notifications"
 	public List<Notification> getAllNotifications() {
@@ -35,12 +49,15 @@ public class NotificationService {
 	// Gets all notifications ready to be sent, and uses Twilio to send
 	public void sendNotification(String dateSend, String timeSend) {
 		List<Notification> notifications = notificationRepository.findByDateSendAndTimeSendAndStatus(dateSend, timeSend, "Pending");
+		
+		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 		for (Notification n : notifications) {
 			String message = n.getMessage();
 			String number = n.getPhoneNumber();
-			System.out.println("This is message: " + message);
-			System.out.println("This is phone: " + number);
-			// use twilio to send
+		
+		    Message twilioMessage = Message.creator(new PhoneNumber("+1"+number),
+		            new PhoneNumber(TWILIO_NUMBER), message).create();
+			
 		}
 	}
 	

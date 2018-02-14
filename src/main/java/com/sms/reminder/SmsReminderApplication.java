@@ -1,4 +1,4 @@
-package com.twilio.sms.reminder;
+package com.sms.reminder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class SmsTwilioReminderApplication {
+public class SmsReminderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SmsTwilioReminderApplication.class, args);
+		SpringApplication.run(SmsReminderApplication.class, args);
 	}
 }

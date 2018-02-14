@@ -1,4 +1,4 @@
-package com.twilio.sms.reminder.notification;
+package com.sms.reminder.notification;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

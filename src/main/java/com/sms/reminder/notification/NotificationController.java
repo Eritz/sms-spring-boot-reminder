@@ -1,4 +1,4 @@
-package com.twilio.sms.reminder.notification;
+package com.sms.reminder.notification;
 
 import java.util.Date;
 import java.util.List;
