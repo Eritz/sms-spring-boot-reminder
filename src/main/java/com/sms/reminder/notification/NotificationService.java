@@ -54,17 +54,19 @@ public class NotificationService {
 		for (Notification n : notifications) {
 			String message = n.getMessage();
 			String number = n.getPhoneNumber();
-		
-		    Message twilioMessage = Message.creator(new PhoneNumber("+1"+number),
-		            new PhoneNumber(TWILIO_NUMBER), message).create();
 			
+			// Just send nothing more because Message.creator() returns a message too
+		    @SuppressWarnings("unused")
+			Message twilioMessage = Message.creator(new PhoneNumber("+1"+number),
+		            new PhoneNumber(TWILIO_NUMBER), message).create();
+		    
 		}
 	}
 	
 	// Find all sent notifications, and change its status from Pending to Finished
 	public void updateNotification(String newStatus, String dateSend, String timeSend, String oldStatus) {
 		notificationRepository.setFixedStatus(newStatus, dateSend, timeSend, oldStatus);
-		System.out.println("Finished updating, go check");
+		System.out.println("Finished updating, go check");// delete when done.
 	}
 		
 	

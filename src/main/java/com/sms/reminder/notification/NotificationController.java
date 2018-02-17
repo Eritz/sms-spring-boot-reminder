@@ -19,7 +19,7 @@ public class NotificationController {
 	@Autowired
 	private NotificationService notificationService;
 	
-	private String datePattern ="MM-dd-yyyy";
+	private String datePattern ="yyyy-MM-dd";
 	private String timePattern ="HH:mm";
 	private SimpleDateFormat simpleDate = new SimpleDateFormat(datePattern);
 	private SimpleDateFormat simpleTime = new SimpleDateFormat(timePattern);
@@ -36,31 +36,22 @@ public class NotificationController {
 		notificationService.addNotification(notification);
 	}
 	
-	///////////////////// GET - get all of a users in a repository
-	///////////////////// Separate method in separate folder
-	@RequestMapping("/users")
-	public void getAllUsers() {
-		//
-	}
-	
 	
 	// Every minute, check if dateSend matches. If it does, then use Twilio to send
 	// Currently using apache, delete when working with mysql
 	@Scheduled(cron = "0 * * * * ?")
 	public void checkNotification() {
-		String currentDate = simpleDate.format(new Date()); //02-13-2018
+		String currentDate = simpleDate.format(new Date()); //2018-02-13
 		String currentTime = simpleTime.format(new Date()); //15:12
 
 		if (notificationService.checkNotification(currentDate, currentTime)) {
-			sendNotification(currentDate, currentTime);
-			updateNotification("Finished",currentDate, currentTime, "Pending");
+			System.out.println("match"); // it works!!!
+			//sendNotification(currentDate, currentTime);
+			//updateNotification("Finished",currentDate, currentTime, "Pending");
 		} else {
-			System.out.println("nothing");
+			System.out.println("nothing"); // delete when done
 		}
 	}
-	
-	// then in notificationService do logic for twilio if true
-	// it'll be a separate notification service void function
 	
 	// POST - send "Pending" notifications at specified date & time
 	@PostMapping("notifications/send")

@@ -6,8 +6,11 @@ import javax.persistence.Id;
 @Entity
 public class Notification {
 	
+
+//	@ManyToOne
+//	@JoinColumn(name = "notification_id") // see if this links okay
 	@Id
-	private String id; // refers back to a name
+	private String id; // refers back to a unique notification id
 	private String dateMade;
 	private String dateSend;
 	private String timeSend;
