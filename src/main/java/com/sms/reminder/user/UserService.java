@@ -1,5 +1,7 @@
 package com.sms.reminder.user;
 
+import com.sms.reminder.notification.Notification;
+import com.sms.reminder.notification.NotificationRepository;
 import com.sms.reminder.user.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +13,21 @@ import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 // 
 @Service
 public class UserService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	// UNCLEAN
+	@Autowired
+	private NotificationRepository notificationRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -34,6 +45,15 @@ public class UserService implements UserDetailsService{
 	public void registerUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
+	}
+
+	public List<Notification> getUserNotifications(String username) {
+		// THIS IS VERY UNCLEAN
+		return notificationRepository.findByUsername(username);
+	}
+
+	public boolean checkRegisterUser(String username) {
+		return userRepository.existsByUsername(username);
 	}
 	
 	

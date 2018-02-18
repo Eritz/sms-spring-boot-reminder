@@ -2,6 +2,26 @@
 package com.sms.reminder.security;
 
 import static com.sms.reminder.security.SecurityConstants.SIGN_UP_URL;
+import static com.sms.reminder.security.SecurityConstants.SIGN_UP_CHECK;
+import static com.sms.reminder.security.SecurityConstants.NOTIFICATIONS_URL;
+import static com.sms.reminder.security.SecurityConstants.LOGIN_URL;
+import static com.sms.reminder.security.SecurityConstants.LOGOUT_URL;
+import static com.sms.reminder.security.SecurityConstants.MY_ACCOUNT_URL;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import static com.sms.reminder.security.SecurityConstants.NOTIFICATIONS_URL;
 import static com.sms.reminder.security.SecurityConstants.LOGIN_URL;
 import static com.sms.reminder.security.SecurityConstants.LOGOUT_URL;
@@ -39,12 +59,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+			.antMatchers(HttpMethod.POST, SIGN_UP_CHECK).permitAll()
 			.antMatchers(HttpMethod.POST, NOTIFICATIONS_URL).permitAll()
 			.antMatchers(HttpMethod.GET, NOTIFICATIONS_URL).hasAuthority("ADMIN")
 			.antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
 			.antMatchers(HttpMethod.GET, LOGOUT_URL).authenticated()
-			.antMatchers(HttpMethod.GET, MY_ACCOUNT_URL).authenticated()
-			.anyRequest().permitAll()
+			.antMatchers(HttpMethod.GET, MY_ACCOUNT_URL).permitAll()
+			.and()
+			.formLogin()
+			.loginPage("/login")
 			.and()
 			// this config is for Basic Authentication, so the below code will not work.
 			//.logout().logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL)).logoutSuccessUrl(LOGIN_URL)

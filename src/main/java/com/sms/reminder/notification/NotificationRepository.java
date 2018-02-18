@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface NotificationRepository extends CrudRepository<Notification, String>{
+public interface NotificationRepository extends CrudRepository<Notification, Long>{
 	
 	//Return a list of notifications with the current date/time with "Pending" status
 	public List<Notification> findByDateSendAndTimeSendAndStatus(String dateSend, String timeSend, String status);
@@ -23,4 +23,8 @@ public interface NotificationRepository extends CrudRepository<Notification, Str
 	@Modifying
 	@Query("UPDATE Notification n SET n.status = ?1 WHERE n.dateSend= ?2 AND n.timeSend = ?3 AND n.status = ?4")
 	public void setFixedStatus(String newStatus, String dateSend, String timeSend, String oldStatus);
+	
+	//
+	public List<Notification> findByUsername(String username);
+	
 }

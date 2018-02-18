@@ -1,12 +1,19 @@
 package com.sms.reminder.user;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,14 +25,17 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="USER_ID")
 	private long userId;
+	
+	@Column(name="NAME")
 	private String username; // unique username
+	
+	@Column(name="PASSWORD")
 	private String password;
-	// a user can have multiple notifications
-	// but some notifications might not have a user
-	// One to Many
-	@OneToMany(mappedBy="id", cascade = CascadeType.ALL)
-	private Set<Notification> notifications;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="useraccount", fetch=FetchType.LAZY)
+	private List<Notification> notifications = new ArrayList<>();
 	
 	public long getUserId() {
 		return userId;
@@ -47,17 +57,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Set<Notification> getNotifications() {
+	public List<Notification> getNotifications() {
 		return notifications;
 	}
-	public void setNotifications(Set<Notification> notifications) {
+	public void setNotifications(List<Notification> notifications) {
 		this.notifications = notifications;
 	} 
 	
+	public void addNotifications(Notification notification) {
+		notifications.add(notification);
+		notification.setUseraccount(this);
+	}
 	
-
-	
-	
-	
+	public void removeNotifications(Notification notification) {
+		notifications.remove(notification);
+		notification.setUseraccount(null);
+	}
 	
 }

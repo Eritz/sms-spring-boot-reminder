@@ -1,28 +1,53 @@
 package com.sms.reminder.notification;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sms.reminder.user.User;
+
 
 @Entity
+@Table(name="notifications")
 public class Notification {
 	
-
-//	@ManyToOne
-//	@JoinColumn(name = "notification_id") // see if this links okay
 	@Id
-	private String id; // refers back to a unique notification id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="NOTIFICATION_ID")
+	private Long id;
+	
+	@Column(name="DATE_MADE")
 	private String dateMade;
+	@Column(name="DATE_SEND")
 	private String dateSend;
+	@Column(name="TIME_SEND")
 	private String timeSend;
+	@Column(name="PHONE_NUMBER")
 	private String phoneNumber;
+	@Column(name="MESSAGE")
 	private String message;
+	@Column(name="STATUS")
 	private String status;
+	@Column(name="NAME")
+	private String username;
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name="useraccount")
+	private User useraccount;
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 		
@@ -62,5 +87,21 @@ public class Notification {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public User getUseraccount() {
+		return useraccount;
+	}
+	public void setUseraccount(User useraccount) {
+		this.useraccount = useraccount;
+	}
+	
+	
+	
+	
 
 }
