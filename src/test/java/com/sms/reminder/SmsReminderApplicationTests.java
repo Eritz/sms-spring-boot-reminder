@@ -1,4 +1,4 @@
-package com.twilio.sms.reminder;
+package com.sms.reminder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SmsTwilioReminderApplicationTests {
+public class SmsReminderApplicationTests {
 
 	@Test
 	public void contextLoads() {
