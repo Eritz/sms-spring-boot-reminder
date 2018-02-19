@@ -66,7 +66,6 @@ public class NotificationService {
 	// Find all sent notifications, and change its status from Pending to Finished
 	public void updateNotification(String newStatus, String dateSend, String timeSend, String oldStatus) {
 		notificationRepository.setFixedStatus(newStatus, dateSend, timeSend, oldStatus);
-		System.out.println("Finished updating, go check");// delete when done.
 	}
 		
 	

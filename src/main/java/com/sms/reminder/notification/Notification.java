@@ -8,11 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sms.reminder.user.User;
 
 
@@ -33,6 +32,7 @@ public class Notification {
 	private String timeSend;
 	@Column(name="PHONE_NUMBER")
 	private String phoneNumber;
+	@Lob
 	@Column(name="MESSAGE")
 	private String message;
 	@Column(name="STATUS")

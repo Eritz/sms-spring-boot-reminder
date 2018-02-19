@@ -45,12 +45,10 @@ public class NotificationController {
 		String currentTime = simpleTime.format(new Date()); //15:12
 
 		if (notificationService.checkNotification(currentDate, currentTime)) {
-			System.out.println("match"); // it works!!!
-			//sendNotification(currentDate, currentTime);
-			//updateNotification("Finished",currentDate, currentTime, "Pending");
-		} else {
-			System.out.println("nothing"); // delete when done
-		}
+			sendNotification(currentDate, currentTime);
+			updateNotification("Finished",currentDate, currentTime, "Pending");
+		} 
+		return;
 	}
 	
 	// POST - send "Pending" notifications at specified date & time
