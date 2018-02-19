@@ -5,7 +5,4 @@ Web application that uses the Twilio API to send SMS notifications. This web app
 The project's back end is created with Spring Boot, while the front end is built with React.js. The source code for the front end can be found 
 [here](https://github.com/Eritz/sms-reminder-frontend).
 
-![image](https://user-images.githubusercontent.com/14249336/36358733-1aba71fc-14e1-11e8-831b-31042294aa14.png)
-
-
-![image](https://user-images.githubusercontent.com/14249336/36358310-85bec1b2-14da-11e8-9b03-8745f123fecd.png)
+![textreminder](https://user-images.githubusercontent.com/14249336/36359740-ff97a312-14eb-11e8-9139-a4c544a08ca8.gif)

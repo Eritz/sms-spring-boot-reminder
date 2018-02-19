@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Sun Feb 18 19:01:52 EST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0161-ab5d-e3f0-00000ccb31f8 
+Sun Feb 18 20:08:51 EST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0161-ab9b-35c6-00000c1c28a0 
 on database directory memory:C:\Users\Eddie\Documents\Spring Boot\sms-reminder\testdb with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
 Loaded from file:/C:/Users/Eddie/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
