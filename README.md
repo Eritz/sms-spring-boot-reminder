@@ -2,7 +2,7 @@
 
 **Link:** ~~http://smsreminder-prod.us-east-2.elasticbeanstalk.com/~~
 
-Edit: Shutdown link due to cost, but feel free to fork the repo and do whatever you want with it.
+**Edit:** Shutdown link due to cost, but feel free to fork the repo and do whatever you want with it.
 
 Web application that uses the Twilio API to send SMS notifications. This web application can only send to United States phone numbers. Sent messages are done via a Twilio Trial account. ~~Deployed to AWS, and times are based on UTC.~~
 
